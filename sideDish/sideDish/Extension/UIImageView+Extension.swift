@@ -15,9 +15,12 @@ extension UIImageView {
             if let error = error {
                 print(error.localizedDescription)
             }
-            DispatchQueue.main.async {
-                self.image = image ?? UIImage(named: "tempFood")
-            }
+            DispatchQueue.main.async {[weak self] in
+                
+                       print("Download image success \(url)")
+
+                    self?.image = image
+                   }
         }.resume()
     }
 }

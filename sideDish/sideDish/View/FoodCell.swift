@@ -84,14 +84,21 @@ class FoodCell: UICollectionViewCell {
     }()
     
     func setDomainFood(data: Food){
+        clearStackView()
+        myImageView.loadImage(url: data.image)
         titleLabel.text = data.title
         bodyLabel.text = data.description
         salePriceLabel.text = data.salePrice
         beforeSalePriceLabel.text = data.beforeSalePrice
         guard let badge = data.badge else { return }
         setBadgeLabel(badge)
-        myImageView.loadImage(url: data.image)
         
+    }
+    
+    func clearStackView() {
+        for view in stackView.subviews {
+            view.removeFromSuperview()
+        }
     }
     
     func setBadgeLabel(_ badge: [String]){

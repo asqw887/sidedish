@@ -25,10 +25,20 @@ class FoodManager{
         NetworkManager.getRequest(url: "https://api.codesquad.kr/onban/main") { data in
             guard let result: Response = JsonConvertor.decodeJson(data: data) else { return }
             self.mainFood = result.body
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Main"), object: self)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Food"), object: self)
         }
         
-        soupFood = JsonConvertor.mockLoad(file: "soup")
-        sideFood = JsonConvertor.mockLoad(file: "side")
+        NetworkManager.getRequest(url: "https://api.codesquad.kr/onban/soup") { data in
+            guard let result: Response = JsonConvertor.decodeJson(data: data) else { return }
+            self.soupFood = result.body
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Food"), object: self)
+        }
+        
+        NetworkManager.getRequest(url: "https://api.codesquad.kr/onban/side") { data in
+            guard let result: Response = JsonConvertor.decodeJson(data: data) else { return }
+            self.sideFood = result.body
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Food"), object: self)
+        }
+
     }
 }

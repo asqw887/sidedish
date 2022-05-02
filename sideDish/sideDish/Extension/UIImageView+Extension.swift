@@ -16,9 +16,6 @@ extension UIImageView {
                 print(error.localizedDescription)
             }
             DispatchQueue.main.async {[weak self] in
-                
-                       print("Download image success \(url)")
-
                     self?.image = image
                    }
         }.resume()

@@ -80,7 +80,7 @@ class FoodCell: UICollectionViewCell {
     
     func setDomainFood(data: Food){
         clearStackView()
-        myImageView.loadImage(url: data.image)
+        myImageView.loadImage(url: data.imageURL)
         titleLabel.text = data.title
         bodyLabel.text = data.description
         salePriceLabel.text = data.salePrice

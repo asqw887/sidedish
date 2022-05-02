@@ -21,7 +21,13 @@ class FoodManager{
     
     func foodLoadData(){
         // Todo: API로 요청 -> 실패시 mockup data 로 데이터 가져오도록
-        mainFood = JsonConvertor.mockLoad(file: "main")
+        
+        NetworkManager.getRequest(url: "https://api.codesquad.kr/onban/main") { data in
+            guard let result: Response = JsonConvertor.decodeJson(data: data) else { return }
+            self.mainFood = result.body
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Main"), object: self)
+        }
+        
         soupFood = JsonConvertor.mockLoad(file: "soup")
         sideFood = JsonConvertor.mockLoad(file: "side")
     }

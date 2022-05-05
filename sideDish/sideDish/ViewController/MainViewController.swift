@@ -37,6 +37,15 @@ class MainViewController: UIViewController {
         collectionView.register(FoodCell.self, forCellWithReuseIdentifier: cellID)
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadCollection), name: NSNotification.Name(rawValue: "Food"), object: nil)
+    }
+    
+    @objc
+    func reloadCollection(){
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
     
     func configureCollectionViewLayout() {
